@@ -1,0 +1,114 @@
+#include "stdafx.h"
+#include <iostream>
+#include "stdio.h"
+#include "conio.h"
+#define MAX 50
+using namespace std;
+
+void CargarVector (int v[],int n);
+void MostrarVector (int v[],int n);
+int SumaImpares(int v[],int n);
+bool existeNumero(int v[],int n, int x);
+int factorial(int n);
+void factorialVector(int v[],int n);
+
+void main(){
+int V[MAX];
+int N,X;
+bool k;
+cout << " Ingrese la cantidad de elementos del vector: "<< endl;
+cin >> N;
+//cout << " Ingrese el Numero que quiere buscar en el vector: " << endl;
+//cin >> X;
+CargarVector(V,N);
+MostrarVector(V,N);
+SumaImpares(V,N);
+factorialVector(V,N);
+//k = existeNumero(V,N,X);
+//if(k == true){
+	//cout << "El Numero existe en el vector" << endl;
+//}else{
+	//cout << "El Numero no existe en el vector" << endl;
+//}
+getch();
+}
+
+void CargarVector(int v[],int n){
+	for(int i = 0; i < n; i++){
+		cout << "V[" << i << "]= ";
+		cin >> v[i];
+	}
+}
+
+void MostrarVector(int v[],int n){
+	for(int i = 0;i < n; i++){
+		cout << "V[" << i << "]= " << v[i] << endl;
+	}
+}
+
+int SumaImpares (int v[], int n){
+	if(n == 1){
+		if(v[0]%2 == 1){
+			return v[0];
+		}else{
+			return 0;
+		}
+	}
+	else{
+		int s = SumaImpares(v,n-1);
+		if(v[n-1] %2 == 1){
+			return s + v[n-1];
+		}else{
+			return s;
+		}
+	}
+}
+
+
+bool existeNumero(int v[],int n,int x)
+{
+	if (n==1)
+	{
+		if(v[0]==x)
+			return true;
+			
+		else 
+			return false;
+
+	}
+	else
+	{
+		bool k=existeNumero(v,n-1,x);
+		if(k)
+			return true;
+		else{
+			//hipotesis
+			if(v[n-1]==x)
+			return true;
+		
+		else 
+			return false;
+		}
+	
+	}
+
+
+}
+
+int factorial(int n){
+	if(n == 0){
+		return 1;
+	}else{
+		int x = factorial(n-1);
+		return x*n;
+	}
+}
+
+void factorialVector(int v[],int n){
+	if (n == 1){
+		v[0] = factorial (v[0]);
+	}else{
+		factorialVector(v,n-1);
+		v[n-1] = factorial (v[n-1]);
+	}
+}
