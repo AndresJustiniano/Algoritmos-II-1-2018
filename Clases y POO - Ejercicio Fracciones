@@ -1,0 +1,145 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+class fraccion{
+private:
+ int num;
+ int den;
+
+public:
+ fraccion() {
+   num=1;
+   den=1;
+ }
+
+ void setNum(int n)
+ { num=n; }
+ 
+ void setDen(int d)
+ { den=d; }
+
+ int getNum()
+ { return num; }
+
+ int getDen()
+ { return den; }
+
+void leer()
+{
+  int a,b;
+  
+  cout<<"Num:"; cin>>a; 
+  cout<<"Den:"; cin>>b;
+  num=a;
+  den=b;
+}
+
+void mostrar()
+{
+  cout<<num<<"/"<<den<<endl;
+}
+
+ void simplificar(){
+ int c=2;
+  while(c<=num && c<=den)
+  {
+	 if(num % c==0 && den % c==0){
+	   num=num / c;
+	   den=den / c;
+	 }
+	 else
+		c++;
+  }
+ }
+
+ void sumar(fraccion f1,fraccion f2);
+ void multiplicacion(fraccion f1,fraccion f2);
+ void division(fraccion f1, fraccion f2);
+ void suma2(fraccion f1,fraccion f2);
+}; //fin clase
+
+void fraccion :: sumar(fraccion f1,fraccion f2){  // al sacar la funcion suma de la clase para poder ser usada externamente , se la anota con una sintaxis del tipo (tipo de funcion(void, int , etc), 
+	 int N1 = f1.getNum();                        // luego el nombre de la funcion, posterior se colocal dos puntos abiertos ´:: y luego dejando el nombre de la funcion
+	 int D1 = f1.getDen();                        // sin olvidarnos que el prototipó si se queda en la clase.´
+	 int N2 = f2.getNum();
+	 int D2 = f2.getDen();
+	 int a = (((D1*D2)/D1)*N1);
+	 int b = (((D1*D2)/D2)*N2);
+	 int N3 = a + b;
+	 int D3 = D1*D2;
+	 setNum(N3);
+	 setDen(D3);
+	 simplificar();
+ }
+void fraccion :: multiplicacion (fraccion f1,fraccion f2){
+	int N1 = f1.getNum();
+	int D1 = f1.getDen();
+	int N2 = f2.getNum();
+	int D2 = f2.getDen();
+	int N3 = N1*N2;
+	int D3 = D1*D2;
+	setNum(N3);
+	setDen(D3);
+	simplificar();
+}
+
+void fraccion :: division (fraccion f1, fraccion f2){
+	int N1 = f1.getNum();
+	int D1 = f1.getDen();
+	int N2 = f2.getNum();
+	int D2 = f2.getDen();
+	int N3 = N1 * D2;
+	int D3 = D1 * N2;
+	setNum(N3);
+	setDen(D3);
+	simplificar();
+}
+
+//metodos que no son de la clase fraccion
+int mcd(int a, int b){
+	int aux;
+	while(b>0){
+		aux = b;
+		b = a % b;
+		a = aux;
+	}
+	return a;
+}
+
+int mcm(int a, int b){
+	return (a*b/mcd(a,b));
+}
+
+void fraccion :: suma2(fraccion f1,fraccion f2){
+	int N1 = f1.getNum();
+	int D1 = f1.getDen();
+	int N2 = f2.getNum();
+	int D2 = f2.getDen();
+	int D3 = mcm(D1,D2);
+	int N3 = ((D3 / D1) * N1)+((D3/D2)*N2);
+	setNum(N3);
+	setDen(D3);
+	simplificar();
+}
+
+	
+
+
+
+void main()
+{
+	fraccion f1,f2,f3;
+	f1.leer();
+	f1.mostrar();
+	f2.leer();
+	f2.mostrar();
+	//f3.sumar(f1,f2);
+	f3.suma2(f1,f2);
+	//f3.simplificar();
+	f3.mostrar();
+	
+	getche();
+}
