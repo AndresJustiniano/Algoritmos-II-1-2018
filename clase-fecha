@@ -1,0 +1,131 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+const int diaMes[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+class fecha{
+private:
+ int dia;
+ int mes;
+ int anho;
+
+public:
+ fecha() {
+   dia=mes=anho=0;   
+ }
+
+ void setDia(int d)
+ { dia=d; }
+ 
+ int getDia()
+ { return dia; }
+
+ void setMes(int m)
+ { mes=m; }
+ 
+ int getMes()
+ { return mes; }
+
+ void setAnho(int a)
+ { anho=a; }
+ 
+ int getAnho()
+ { return anho; }
+
+ void leer()
+ {
+	 cout << "Dia: " ; cin>>dia;
+	 cout << "Mes: " ; cin>>mes;
+	 cout << "Anho: " ;cin>>anho;
+ }
+ void mostrar()
+ {
+	 cout <<dia<<"/"<<mes<<"/"<<anho;
+ }
+
+ bool validar(){
+	 if(dia>diaMes[mes] || mes > 12 || anho <= 0)
+		 return false;
+	 else
+		 return true;
+ }
+
+ void manhana();
+ void menor(fecha f1);
+}; //fin clase
+
+void fecha::manhana()
+{
+	if (dia < diaMes[mes]){
+		dia++;
+	}else{
+		if(dia == diaMes[mes]){
+			dia = 1;
+			mes++;
+		}
+		else{
+			if(mes < 12){
+				mes++;
+			}else{
+				if(mes == 12){
+					mes = 1;
+					anho++;
+				}
+			}
+		}
+	}		
+}
+
+void fecha::menor(fecha f1)
+{
+	int DIA,MES,ANHO;
+	DIA = f1.getDia();
+	MES = f1.getMes();
+	ANHO = f1.getAnho();
+	if(anho < ANHO){
+		cout << "La primera fecha es mayor a la segunda. " <<endl;
+	}else{
+		if(anho > ANHO){
+			cout << "La primera fecha es menor a la segunda. " << endl;
+		}else{
+			if(anho == ANHO){
+				if(mes < MES){
+					cout << "La primera fecha es mayor a la segunda. " << endl;
+				}else{
+					if(mes > MES){
+						cout <<"La primera fecha es menor a la segunda. " << endl;
+					}else{
+						if(mes == MES){
+							if(dia < DIA){
+								cout << "La primera fecha es mayor a la segunda. " <<endl;
+							}else{
+								if(dia > DIA){
+									cout << "La primera fecha es menor a la segunda. " << endl;
+								}else{
+									if(dia == DIA){
+										cout << "Ambas fechas son iguales. " << endl;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+void main()
+{
+	fecha f1,f2;
+	f1.leer();
+	f2.leer();
+	f2.menor(f1);
+	getch();
+}
