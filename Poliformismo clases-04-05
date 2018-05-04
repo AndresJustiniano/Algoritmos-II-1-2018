@@ -1,0 +1,118 @@
+clase figura:
+#include "stdafx.h"
+#include <iostream>
+#include <stdio.h>
+#include <string>
+
+using namespace std;
+
+class figura{
+	private:
+		int nro;
+		char color[40];
+	public: 
+		void setNro(int n){ 
+			nro = n;
+		}
+		
+		void setColor(char *c){
+			color [0]='\0';
+			strcat(color,c);
+		}
+
+		int getNro(){
+			return nro;
+		}
+
+		char *getColor(){
+			return color;
+		}
+
+		void leer(){
+			cout << "Nro: ";
+			cin >> nro;
+			cout << "Color: ";
+			cin >> color;
+		}
+
+		void mostrar(){
+			cout << "Nro: " << nro << endl;
+			cout << "Color: " << color << endl;
+		}
+		double calcularArea()
+		{
+		
+		}
+};//End Class
+
+clase circulo
+#include "math.h"
+#include <iostream>
+#include "figura.h"
+
+using namespace std;
+
+class circulo: protected figura {
+	private:
+		int radio;
+	public:
+			void leer(){
+				figura::leer();
+				cout <<"radio: ";
+				cin >> radio;
+			}
+
+			void mostrar(){
+				figura::mostrar();
+				cout << "Radio: " << radio << endl;
+			}
+
+			double calcularArea(){
+				return 3.1416*(radio*radio);
+			}
+
+}; //End class
+
+clase cuadrado:
+
+#include <iostream>
+#include "figura.h"
+
+using namespace std;
+
+class cuadrado: protected figura{
+	private:
+		int ancho;
+		int alto;
+	public:
+		void leer(){
+			figura :: leer();
+			cout << "Ancho: ";
+			cin >> ancho;
+			cout << "Alto: ";
+			cin >> alto;
+		}
+
+		void mostrar(){
+			figura :: mostrar();
+			cout << "Ancho: " << ancho;
+			cout << endl;
+			cout << "Alto: " << alto;
+			cout << endl;
+		}
+
+		double calcularArea(){
+			return ancho*alto;
+		}
+}; //End Class
+
+void main: 
+
+void main(){
+	//adrado cu;
+	circulo ci;
+	ci.leer();
+	ci.mostrar();
+	double x = ci.calcularArea();
+	cout << "\nEl Area de Cuadrado es: " << x;
+}
